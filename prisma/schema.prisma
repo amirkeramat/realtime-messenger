@@ -20,31 +20,31 @@ model User {
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
 
-  consversationIds String[]       @db.ObjectId
-  consversations   Conversation[] @relation(fields: [consversationIds], references: [id])
+  conversationIds String[]       @db.ObjectId
+  conversations   Conversation[] @relation(fields: [conversationIds], references: [id])
 
   seenMessageIds String[]  @db.ObjectId
   seenMessages   Message[] @relation("Seen", fields: [seenMessageIds], references: [id])
 
-  account  Account[]
+  accounts Account[]
   messages Message[]
 }
 
 model Account {
   id                String  @id @default(auto()) @map("_id") @db.ObjectId
-  useId             String  @db.ObjectId
+  userId            String  @db.ObjectId
   type              String
   provider          String
   providerAccountId String
   refresh_token     String? @db.String
   access_token      String? @db.String
-  expiires_at       Int?
+  expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String?
+  id_token          String? @db.String
   session_state     String?
 
-  user User @relation(fields: [useId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -52,9 +52,9 @@ model Account {
 model Conversation {
   id            String   @id @default(auto()) @map("_id") @db.ObjectId
   createdAt     DateTime @default(now())
-  lastMessegaAt DateTime @default(now())
+  lastMessageAt DateTime @default(now())
   name          String?
-  isGroupe      Boolean?
+  isGroup       Boolean?
 
   messagesIds String[]  @db.ObjectId
   messages    Message[]
@@ -76,5 +76,5 @@ model Message {
   conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
 
   senderId String @db.ObjectId
-  sender   User   @relation(fields: [senderId], references: [id])
+  sender   User   @relation(fields: [senderId], references: [id], onDelete: Cascade)
 }
