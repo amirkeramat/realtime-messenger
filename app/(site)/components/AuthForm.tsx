@@ -2,11 +2,14 @@
 
 import { useCallback, useState } from "react";
 import { FieldValues, useForm, SubmitHandler } from "react-hook-form";
-import {BsGithub, BsGoogle} from "react-icons/bs"
+import { BsGithub, BsGoogle } from "react-icons/bs";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 import Input from "@/app/components/inputs/Input";
 import Button from "@/app/components/Button";
 import AuthSocialButton from "./AuthSocialButton";
+import { signIn } from "next-auth/react";
 
 type Variant = "LOGIN" | "REGISTER";
 
@@ -38,18 +41,42 @@ const AuthForm = () => {
     setIsLoading(true);
 
     if (variant === "REGISTER") {
-      //axios register//
+      axios
+        .post("/api/register", data)
+        .catch(() => toast.error("Something went wrong!"))
+        .finally(() => setIsLoading(false));
     }
 
     if (variant === "LOGIN") {
-      //next auth sign in//
+      signIn("credentials", {
+        ...data,
+        redirect: false,
+      })
+        .then((callback) => {
+          if (callback?.error) {
+            toast.error("Invalid credentials");
+          }
+          if (callback?.ok && !callback?.error) {
+            toast.success("Logged in!");
+          }
+        })
+        .finally(() => setIsLoading(false));
     }
   };
 
   const socialAction = (action: string) => {
     setIsLoading(true);
 
-    //next auth social sign in
+    signIn(action, { redirect: false })
+      .then((callback) => {
+        if (callback?.error) {
+          toast.error("Invalid credentials");
+        }
+        if (callback?.ok && !callback?.error) {
+          toast.success("Logged in!");
+        }
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -73,7 +100,13 @@ const AuthForm = () => {
       >
         <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
           {variant === "REGISTER" && (
-            <Input errors={errors} id="name" register={register} label="Name" disabled={isLoading} />
+            <Input
+              errors={errors}
+              id="name"
+              register={register}
+              label="Name"
+              disabled={isLoading}
+            />
           )}
           <Input
             errors={errors}
@@ -130,18 +163,17 @@ const AuthForm = () => {
 
           <div className="mt-6 flex gap-2">
             <AuthSocialButton
-                icon={BsGithub}
-                onClick={()=>socialAction("github")}
-                
+              icon={BsGithub}
+              onClick={() => socialAction("github")}
             />
             <AuthSocialButton
-                icon={BsGoogle}
-                onClick={()=>socialAction("google")}
-                
+              icon={BsGoogle}
+              onClick={() => socialAction("google")}
             />
           </div>
         </div>
-        <div className="
+        <div
+          className="
                 flex
                 gap-2
                 justify-center
@@ -149,16 +181,16 @@ const AuthForm = () => {
                 mt-6
                 px-2
                 text-gray-500        
-        ">
-            <div>
-                {variant === "LOGIN" ? "New to Messenger?" : "Already have an account? "}
-            </div>
-            <div
-            onClick={toggleVariant}
-            className="underline cursor-pointer"
-            >
-                {variant === "LOGIN" ? "Create an account" : "Login"}
-            </div>
+        "
+        >
+          <div>
+            {variant === "LOGIN"
+              ? "New to Messenger?"
+              : "Already have an account? "}
+          </div>
+          <div onClick={toggleVariant} className="underline cursor-pointer">
+            {variant === "LOGIN" ? "Create an account" : "Login"}
+          </div>
         </div>
       </div>
     </div>
