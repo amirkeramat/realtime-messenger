@@ -17,7 +17,7 @@ interface InputProps {
 const Input: React.FC<InputProps> = ({
   label,
   id,
-  type,
+  type = "text",
   required,
   register,
   errors,
@@ -43,7 +43,7 @@ const Input: React.FC<InputProps> = ({
           type={type}
           disabled={disabled}
           autoComplete={id}
-          {...(register(id), { required })}
+          {...register(id, { required })}
           className={clsx(
             `
             form-input
