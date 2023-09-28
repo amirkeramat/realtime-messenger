@@ -1,9 +1,9 @@
 # Realtime-messenger
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![GitHub stars](https://img.shields.io/github/stars/yourusername/your-repo.svg)](https://github.com/yourusername/your-repo/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/yourusername/your-repo.svg)](https://github.com/yourusername/your-repo/network)
-[![GitHub issues](https://img.shields.io/github/issues/yourusername/your-repo.svg)](https://github.com/yourusername/your-repo/issues)
+[![GitHub stars](https://img.shields.io/github/stars/amirkeramat/realtime-messenger.svg)](https://github.com/amirkeramat/realtime-messenger/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/amirkeramat/realtime-messenger.svg)](https://github.com/amirkeramat/realtime-messenger/network)
+[![GitHub issues](https://img.shields.io/github/issues/amirkeramat/realtime-messenger.svg)](https://github.com/amirkeramat/realtime-messenger/issues)
 
 Short project description goes here.
 
@@ -39,6 +39,7 @@ the features of this project
 - Smooth
 
 ## Getting Started
+
 First use npm install to install dependencies ,
 then use npm run dev for run the project
 
@@ -49,10 +50,10 @@ also install npm or yarn (optional,but one of them required)
 
 ### Installation
 
-
 ```shell
 $ git clone https://github.com/amirkeramatrealtime-messenger.git
-$ cd your-repo
+$ cd realtime-messenger
 $ npm install
 $ npm run dev
 
+```
