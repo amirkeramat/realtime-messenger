@@ -31,7 +31,7 @@ const ConversationList: React.FC<ConversationListProps> = ({
     pb-20
     lg:pb-0
     lg:w-80
-    lg:left-10
+    lg:left-20
     lg:block
     overflow-y-auto
     border-r
