@@ -1,4 +1,4 @@
-import React from "react";
+"use client"
 
 const EmptyState = () => {
   return (
@@ -23,7 +23,8 @@ const EmptyState = () => {
         font-semibold
         text-gray-900
         "
-        >Select a Chat or start a new conversation</h3>
+        >Select a Chat or start a new conversation
+        </h3>
       </div>
     </div>
   );
