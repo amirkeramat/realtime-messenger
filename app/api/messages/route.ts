@@ -11,10 +11,6 @@ export async function POST(request: Request) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
-    if (!message) {
-      return new NextResponse("Message is required", { status: 402 });
-    }
-
     const newMessage = await prisma.message.create({
       data: {
         body: message,
