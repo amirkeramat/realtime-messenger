@@ -16,7 +16,9 @@ const Body: React.FC<BodyProps> = ({ initialMessages }) => {
   const { conversationId } = useConversation();
 
   useEffect(() => {
-    axios.post(`/api/conversations/${conversationId}/seen`);
+    if (initialMessages.length > 0) {
+      axios.post(`/api/conversations/${conversationId}/seen`);
+    }
   }, [conversationId]);
 
   return (
