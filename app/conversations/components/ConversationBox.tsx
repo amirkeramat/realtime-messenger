@@ -2,7 +2,6 @@
 
 import { FullConversationType } from "@/app/types";
 import { useCallback, useMemo } from "react";
-import { Conversation, User, Message } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { format } from "date-fns";
 import { useSession } from "next-auth/react";
