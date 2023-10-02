@@ -28,7 +28,7 @@ account and google account for register.
 
 ## Demo
 
-https://amirkeramat-realtime-messenger.vercel.app
+https://text-me-iota.vercel.app
 
 ## Features
 
