@@ -10,6 +10,8 @@ import Avatar from "@/app/components/Avatar";
 import Modal from "@/app/components/Modal";
 import ConfirmModal from "./ConfirmModal";
 import AvatarGroup from "@/app/components/AvatarGroup";
+import useActiveList from "@/app/hooks/useActiveList";
+import { isActiveUser } from "@/app/helper/isActive";
 
 interface ProfileDrawerProps {
   data: Conversation & {
@@ -26,6 +28,9 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
 }) => {
   const otherUser = useOtherUser(data);
 
+  const {members} = useActiveList()
+  const isActive = isActiveUser(members,otherUser?.email!)
+
   const [ConfirmOpen, setConfirmOpen] = useState(false);
 
   const joinedDate = useMemo(() => {
@@ -40,8 +45,8 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
     if (data.isGroup) {
       return `${data.users.length} members`;
     }
-    return "Active";
-  }, [data]);
+    return isActive ? "Active" : "Offline";
+  }, [data,isActive]);
 
   return (
     <>
