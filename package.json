@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
@@ -40,7 +41,8 @@
     "react-select": "^5.7.5",
     "react-spinners": "^0.13.8",
     "tailwindcss": "3.3.3",
-    "typescript": "5.2.2"
+    "typescript": "5.2.2",
+    "zustand": "^4.4.1"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
